@@ -1,0 +1,18 @@
+/vendor
+/node_modules
+composer.lock
+.phpunit.cache
+.phpunit.result.cache
+build
+coverage
+.DS_Store
+.idea
+.vscode
+*.log
+
+# Internal planning doc — predates the open-source decision and names the
+# originating client project; not meant to be published in this public repo.
+/PRD.md
+
+# Local Claude Code project state.
+/.claude

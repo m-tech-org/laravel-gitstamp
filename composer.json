@@ -1,0 +1,70 @@
+{
+    "name": "m-tech-org/laravel-gitstamp",
+    "description": "Deploy-time git commit/date stamping for Laravel apps with no build pipeline — know what's actually running in production without SSHing in.",
+    "keywords": [
+        "laravel",
+        "deployment",
+        "version",
+        "git",
+        "versioning"
+    ],
+    "homepage": "https://github.com/m-tech-org/laravel-gitstamp",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Morph Technologies",
+            "homepage": "https://github.com/m-tech-org"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "illuminate/console": "^9.0|^10.0|^11.0|^12.0",
+        "illuminate/support": "^9.0|^10.0|^11.0|^12.0",
+        "symfony/process": "^6.0|^7.0"
+    },
+    "require-dev": {
+        "larastan/larastan": "^2.9|^3.0",
+        "laravel/pint": "^1.13",
+        "orchestra/testbench": "^7.0|^8.0|^9.0|^10.0",
+        "pestphp/pest": "^2.0|^3.0",
+        "pestphp/pest-plugin-laravel": "^2.0|^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MTechOrg\\Gitstamp\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MTechOrg\\Gitstamp\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint",
+        "analyse": "vendor/bin/phpstan analyse --memory-limit=512M"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MTechOrg\\Gitstamp\\GitstampServiceProvider"
+            ],
+            "aliases": {
+                "Gitstamp": "MTechOrg\\Gitstamp\\Facades\\Gitstamp"
+            }
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
