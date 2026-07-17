@@ -10,43 +10,61 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    # Note: composer.json sets config.policy.advisories.block=false — this matrix
+    # intentionally installs Laravel majors past their security-support window
+    # (10/11) to verify compatibility, which Composer would otherwise refuse to
+    # resolve once an advisory has no fixed release to upgrade to.
+    #
+    # Laravel 9 (Testbench 7) is NOT in this matrix: every Pest 2.x release
+    # requires PHPUnit ^10, but Testbench 7 pins PHPUnit to ^9.5.10 only — the
+    # two can never resolve together. The package's `require` still allows
+    # Laravel 9 at runtime (nothing in its code is version-specific), it's only
+    # automated coverage that can't reach that low with this toolchain.
+    #
+    # `pest` is pinned per-leg alongside `testbench`: Pest 3 requires PHPUnit
+    # internals newer than what the Laravel 10 (Testbench 8) stack pulls in by
+    # default, so the Testbench 8 legs use Pest 2 and Testbench 9/10 legs use
+    # Pest 3.
     strategy:
       fail-fast: false
       matrix:
         include:
           - php: '8.1'
-            laravel: '9.*'
-            testbench: '^7.0'
-          - php: '8.1'
             laravel: '10.*'
             testbench: '^8.0'
-          - php: '8.2'
-            laravel: '9.*'
-            testbench: '^7.0'
+            pest: '^2.0'
           - php: '8.2'
             laravel: '10.*'
             testbench: '^8.0'
+            pest: '^2.0'
           - php: '8.2'
             laravel: '11.*'
             testbench: '^9.0'
+            pest: '^3.0'
           - php: '8.2'
             laravel: '12.*'
             testbench: '^10.0'
+            pest: '^3.0'
           - php: '8.3'
             laravel: '10.*'
             testbench: '^8.0'
+            pest: '^2.0'
           - php: '8.3'
             laravel: '11.*'
             testbench: '^9.0'
+            pest: '^3.0'
           - php: '8.3'
             laravel: '12.*'
             testbench: '^10.0'
+            pest: '^3.0'
           - php: '8.4'
             laravel: '11.*'
             testbench: '^9.0'
+            pest: '^3.0'
           - php: '8.4'
             laravel: '12.*'
             testbench: '^10.0'
+            pest: '^3.0'
 
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
 
@@ -63,7 +81,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "illuminate/contracts=${{ matrix.laravel }}" "orchestra/testbench=${{ matrix.testbench }}" --no-interaction --no-update
+          composer require "illuminate/contracts=${{ matrix.laravel }}" "orchestra/testbench=${{ matrix.testbench }}" "pestphp/pest=${{ matrix.pest }}" --no-interaction --no-update
           composer update --prefer-dist --no-interaction --no-progress
 
       - name: Run tests

@@ -30,6 +30,21 @@ description, the Laravel/PHP versions involved, and steps to reproduce if you're
   `composer analyse`.
 - New behavior should come with [Pest](https://pestphp.com/) tests under `tests/Feature`.
 
+## A note on old Laravel majors in CI
+
+`composer.json` sets `config.policy.advisories.block` to `false`. This package intentionally
+supports Laravel majors that eventually fall outside their security-support window, and once a
+major has no fixed release for a given advisory, Composer's advisory-blocking would otherwise
+refuse to resolve *any* version of it — breaking installs/CI for a supported major through no
+fault of this package. This setting only affects composer commands run directly in this
+repository (root-package-only), not consumers who require this package.
+
+Laravel 9 (Testbench 7) is supported at runtime — `composer.json`'s `require` allows it and
+nothing in this package's code is version-specific — but it's **not** in the `run-tests.yml`
+matrix: every Pest 2.x release requires PHPUnit `^10`, while Testbench 7 pins PHPUnit to
+`^9.5.10` only, so the two can never resolve together. If you find a way to close that gap (a
+separate PHPUnit-only job, for instance), a PR is welcome.
+
 ## Scope
 
 Keep in mind this package's non-goals (see [ABOUT.md](ABOUT.md)): it isn't a general

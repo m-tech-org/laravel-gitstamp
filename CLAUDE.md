@@ -19,6 +19,13 @@ composer analyse      # PHPStan / Larastan, static analysis
 
 Run a single test file: `vendor/bin/pest tests/Feature/GitstampServiceTest.php`.
 
+CI (`run-tests.yml`) matrix-tests Laravel 10–12 only, pinning both `orchestra/testbench` and
+`pestphp/pest` per leg (see the workflow's comments). Laravel 9 is excluded from CI — not
+unsupported, just untestable with Pest, since every Pest 2.x release requires PHPUnit `^10` and
+Laravel 9's Testbench pins PHPUnit to `^9.5.10` only. `composer.json`'s `config.policy.advisories.block`
+is `false` (root-package-only) so Composer doesn't refuse to resolve Laravel majors past their
+security-support window.
+
 ## What this package is
 
 `m-tech-org/laravel-gitstamp` (PHP namespace `MTechOrg\Gitstamp`) is a small, reusable Composer
