@@ -70,8 +70,8 @@ out to git per-request.
 
 ## Distribution & versioning
 
-- Installed by consuming apps via Composer's VCS repository pointing at
-  `git@github.com:m-tech-org/laravel-gitstamp.git` (not on Packagist).
+- Published on [Packagist](https://packagist.org/packages/m-tech-org/laravel-gitstamp); consuming
+  apps install it with a plain `composer require m-tech-org/laravel-gitstamp`.
 - Releases happen on `master`, tagged with real semver (`v1.0.0`, ...). Day-to-day work happens on
   `develop`.
 

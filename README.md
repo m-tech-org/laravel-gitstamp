@@ -25,22 +25,6 @@ test tooling pins to. See
 
 ## Installation
 
-This package isn't published on Packagist. Install it via Composer's VCS repository support:
-
-```json
-{
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:m-tech-org/laravel-gitstamp.git"
-        }
-    ],
-    "require": {
-        "m-tech-org/laravel-gitstamp": "^1.0"
-    }
-}
-```
-
 ```bash
 composer require m-tech-org/laravel-gitstamp
 ```
