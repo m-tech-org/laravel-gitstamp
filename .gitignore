@@ -15,6 +15,9 @@ coverage
 # originating client project; not meant to be published in this public repo.
 /PRD.md
 
+# Integration feedback notes — name the consuming client project; kept local only.
+/feedback.md
+
 # Local Claude Code project state.
 /.claude
 *.txt
