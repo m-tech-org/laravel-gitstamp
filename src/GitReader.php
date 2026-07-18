@@ -8,17 +8,19 @@ use Symfony\Component\Process\Process;
 class GitReader
 {
     /**
-     * Resolve the short SHA of HEAD for the git repository at $cwd.
+     * Resolve the short SHA of HEAD for the git repository containing $cwd.
      *
-     * Returns null (never throws) whenever a SHA can't be resolved: no
-     * `.git` directory, git not on $PATH, or the process otherwise fails.
+     * Git walks up from $cwd to find the repository root itself, so this
+     * works when the app is a subdirectory of a checkout (monorepo layouts)
+     * and when `.git` is a file rather than a directory (worktrees,
+     * submodules).
+     *
+     * Returns null (never throws) whenever a SHA can't be resolved: not
+     * inside a git repository, git not on $PATH, or the process otherwise
+     * fails.
      */
     public function shortSha(string $cwd): ?string
     {
-        if (! is_dir($cwd.'/.git')) {
-            return null;
-        }
-
         try {
             $process = new Process(['git', 'rev-parse', '--short', 'HEAD'], $cwd);
             $process->run();

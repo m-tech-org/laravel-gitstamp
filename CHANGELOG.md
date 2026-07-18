@@ -4,6 +4,16 @@ All notable changes to `laravel-gitstamp` are documented here. The format follow
 [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.0.1] - 2026-07-18
+
+### Fixed
+
+- `gitstamp:generate` now resolves the commit SHA when the Laravel app lives in a subdirectory
+  of a git checkout (monorepo layouts) and when `.git` is a file rather than a directory
+  (worktrees, submodules). Previously an over-eager `.git`-directory check made these setups
+  silently fall back to the configured fallback value. Git itself now locates the repository
+  root by walking up from the app directory.
+
 ## [1.0.0] - 2026-07-18
 
 ### Added
