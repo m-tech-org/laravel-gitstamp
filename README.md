@@ -2,6 +2,8 @@
 
 [![run-tests](https://github.com/m-tech-org/laravel-gitstamp/actions/workflows/run-tests.yml/badge.svg)](https://github.com/m-tech-org/laravel-gitstamp/actions/workflows/run-tests.yml)
 [![code-quality](https://github.com/m-tech-org/laravel-gitstamp/actions/workflows/code-quality.yml/badge.svg)](https://github.com/m-tech-org/laravel-gitstamp/actions/workflows/code-quality.yml)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/m-tech-org/laravel-gitstamp.svg)](https://packagist.org/packages/m-tech-org/laravel-gitstamp)
+[![Total Downloads](https://img.shields.io/packagist/dt/m-tech-org/laravel-gitstamp.svg)](https://packagist.org/packages/m-tech-org/laravel-gitstamp)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 
 Know what's actually running in production, without SSHing in and running `git log`.
@@ -24,6 +26,8 @@ test tooling pins to. See
 [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## Installation
+
+Available on [Packagist](https://packagist.org/packages/m-tech-org/laravel-gitstamp):
 
 ```bash
 composer require m-tech-org/laravel-gitstamp
